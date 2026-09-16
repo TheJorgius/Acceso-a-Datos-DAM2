@@ -1,15 +1,62 @@
+import java.util.Scanner;
+
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
-    public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+    public static Clientes darDeAlta(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Escribe los datos");
+        System.out.println("Nombre: ");
+        String nombre= sc.next();
+        System.out.println("Telefono: ");
+        String telefono= sc.next();
+        System.out.println("Matricula: ");
+        String matricula= sc.next();
+        Clientes cliente= new Clientes(nombre,telefono,matricula);
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
+
+    }
+    public static void mostrarMenu(){
+        int opcion;
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("=== GESTIÓN DE GASOLINERA ===");
+        System.out.println("1. Dar de alta un cliente");
+        System.out.println("2. Listar clientes");
+        System.out.println("3. Buscar clientes");
+        System.out.println("4. Procesar un pago de repostaje");
+        System.out.println("5. Consultar pagos");
+        System.out.println("0. Salir");
+        System.out.println("Opcion:");
+
+        opcion=sc.nextInt();
+        switch (opcion){
+            case 1:
+                darDeAlta();
+                break;
+            case 2:
+                listarClientes();
+                break;
+            case 3:
+                buscarClientes();
+                break;
+            case 4:
+                procesarPago();
+                break;
+            case 5:
+                consultarPagos();
+                break;
+            case 0:
+
+                break;
+
         }
+
+    }
+
+    public static void main(String[] args){
+
+        mostrarMenu();
     }
 }
