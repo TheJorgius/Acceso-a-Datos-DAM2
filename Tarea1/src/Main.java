@@ -33,43 +33,48 @@ public static void consultarPagos(){
 
 
 
-    public static void mostrarMenu(){
+    public static void mostrarMenu() {
         int opcion;
 
         Scanner sc = new Scanner(System.in);
+        do {
+            System.out.println("=== GESTIÓN DE GASOLINERA ===");
+            System.out.println("1. Dar de alta un cliente");
+            System.out.println("2. Listar clientes");
+            System.out.println("3. Buscar clientes");
+            System.out.println("4. Procesar un pago de repostaje");
+            System.out.println("5. Consultar pagos");
+            System.out.println("0. Salir");
+            System.out.println("Opcion:");
 
-        System.out.println("=== GESTIÓN DE GASOLINERA ===");
-        System.out.println("1. Dar de alta un cliente");
-        System.out.println("2. Listar clientes");
-        System.out.println("3. Buscar clientes");
-        System.out.println("4. Procesar un pago de repostaje");
-        System.out.println("5. Consultar pagos");
-        System.out.println("0. Salir");
-        System.out.println("Opcion:");
+            opcion = sc.nextInt();
+            switch (opcion) {
+                case 1:
+                    darDeAlta();
+                    break;
+                case 2:
+                    listarClientes();
+                    break;
+                case 3:
+                    buscarClientes();
+                    break;
+                case 4:
+                    procesarPago();
+                    break;
+                case 5:
+                    consultarPagos();
+                    break;
+                case 0:
 
-        opcion=sc.nextInt();
-        switch (opcion){
-            case 1:
-                darDeAlta();
-                break;
-            case 2:
-                listarClientes();
-                break;
-            case 3:
-                buscarClientes();
-                break;
-            case 4:
-                procesarPago();
-                break;
-            case 5:
-                consultarPagos();
-                break;
-            case 0:
+                    break;
+                default:
+                    System.out.println("Esa no es una opcion valida selecciona una opcion valida");
 
-                break;
+                    break;
 
-        }
+            }
 
+        }while (opcion != 0) ;
     }
 
     public static void main(String[] args){
