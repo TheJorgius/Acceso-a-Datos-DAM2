@@ -15,7 +15,24 @@ public class Main {
         Clientes cliente= new Clientes(nombre,telefono,matricula);
 
 
+        return cliente;
     }
+public static void listarClientes(){
+
+}
+public static void buscarClientes(){
+
+}
+public static void procesarPago(){
+
+}
+public static void consultarPagos(){
+
+}
+
+
+
+
     public static void mostrarMenu(){
         int opcion;
 
