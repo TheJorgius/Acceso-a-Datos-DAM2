@@ -1,8 +1,11 @@
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
+
     public static Clientes darDeAlta(){
         Scanner sc = new Scanner(System.in);
         System.out.println("Escribe los datos");
@@ -17,27 +20,32 @@ public class Main {
 
         return cliente;
     }
-public static void listarClientes(){
+    public static void listarClientes(){
 
-}
-public static void buscarClientes(){
+    }
+    public static void buscarClientes(){
 
-}
-public static void procesarPago(){
-
-}
-public static void consultarPagos(){
-
-}
+    }
+    public static void procesarPago(){
+        Scanner sc = new Scanner(System.in);
+        listarClientes();
+        System.out.println("Dime el id de cliente");
+        int id=sc.nextInt();
+        //comprobar que existe el cliente por id
+        System.out.println("Dime fecha, importe, litros y combustible");
+        //Asignar un identificador de pago, guardar la operación y mostrar una
+        //confirmación con el identificador, el nombre del cliente y el importe
+    }
+    public static void consultarPagos(){
+        //Leeremos todos los tados en formato ID,Nombre Cliente, Fecha, Importe, Litros, Tipo_Combustible
+    }
 
 
 
 
     public static void mostrarMenu() {
-        int opcion;
 
-        Scanner sc = new Scanner(System.in);
-        do {
+
             System.out.println("=== GESTIÓN DE GASOLINERA ===");
             System.out.println("1. Dar de alta un cliente");
             System.out.println("2. Listar clientes");
@@ -47,6 +55,15 @@ public static void consultarPagos(){
             System.out.println("0. Salir");
             System.out.println("Opcion:");
 
+
+    }
+
+    public static void main(String[] args){
+        int opcion;
+        Scanner sc = new Scanner(System.in);
+
+        do {
+            mostrarMenu();
             opcion = sc.nextInt();
             switch (opcion) {
                 case 1:
@@ -74,11 +91,6 @@ public static void consultarPagos(){
 
             }
 
-        }while (opcion != 0) ;
-    }
-
-    public static void main(String[] args){
-
-        mostrarMenu();
+        }while (opcion != 0);
     }
 }
