@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
@@ -30,31 +31,36 @@ public class Main {
         int opcion;
         Scanner sc = new Scanner(System.in);
         Gestion G1= new Gestion();
+        Ficheros F1= new Ficheros();
         do {
             mostrarMenu();
             opcion = sc.nextInt();
             switch (opcion) {
                 case 1:
-                    G1.darDeAlta();
+                    G1.darDeAlta(F1);
                     break;
                 case 2:
-                    G1.listarClientes();
+                    G1.listarClientes(F1);
                     break;
                 case 3:
-                    G1.buscarClientes();
+                    G1.buscarClientes(F1);
                     break;
                 case 4:
-                    G1.procesarPago();
+                    G1.procesarPago(F1);
                     break;
                 case 5:
-                    G1.consultarPagos();
+                    G1.consultarPagos(F1);
                     break;
                 case 0:
 
                     break;
                 default:
                     System.out.println("Esa no es una opcion valida selecciona una opcion valida");
-
+                    try {
+                        F1.crearDirectorioYArchivos();
+                    }catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
                     break;
 
             }
