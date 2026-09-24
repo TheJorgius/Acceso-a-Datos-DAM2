@@ -23,15 +23,16 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        int opcion;
         Ficheros F1= new Ficheros();
-
+        Gestor G1= new Gestor();
         do {
             mostrarMenu();
-            int opcion = sc.nextInt();
+            opcion = sc.nextInt();
             switch (opcion) {
                 case 1:
                     Cliente altaCliente = G1.darDeAlta();
-                    
+
                     break;
                 case 2:
                     G1.listarClientes(F1);
@@ -60,13 +61,7 @@ public class Main {
             }
 
         }while (opcion != 0);
-        try {
-            System.out.println("Lista de clientes");
-            List <Cliente> clientes = F1.leerClientes();
-            System.out.println(clientes);
-        }catch (IOException e){
-            System.out.println(e);
-        }
+
 
 
     }
