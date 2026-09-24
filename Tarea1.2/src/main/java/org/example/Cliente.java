@@ -6,7 +6,9 @@ public class Cliente {
     String tlfn;
     String matricula;
 
-    public Cliente(String nombre, String telefono, String matricula) {
+    public Cliente(int id, String nombre, String telefono, String matricula) {
 
     }
+
+    
 }
