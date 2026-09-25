@@ -13,6 +13,22 @@ public class Cliente {
         this.matricula = matricula;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getTlfn() {
+        return tlfn;
+    }
+
+    public String getMatricula() {
+        return matricula;
+    }
+
     @Override
     public String toString() {
         return "Cliente{" +

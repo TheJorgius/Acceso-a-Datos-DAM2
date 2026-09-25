@@ -26,22 +26,42 @@ public class Main {
         int opcion;
         Ficheros F1= new Ficheros();
         Gestor G1= new Gestor();
+        List<Cliente> clientesList=null;
+        List<Pagos> pagosList=null;
+        try {
+            clientesList= F1.leerClientes();
+            pagosList= F1.leerPagos();
+        }catch (IOException e) {
+            System.out.println(e);;
+        }
+
+
         do {
             mostrarMenu();
             opcion = sc.nextInt();
             switch (opcion) {
                 case 1:
-                    Cliente altaCliente = G1.darDeAlta();
+                    clientesList = G1.darDeAlta(clientesList);
+                    try {
+                        F1.escribirClientes(clientesList);
+                    }catch (IOException e){
+                        System.out.println(e);
+                    }
 
                     break;
                 case 2:
-                    G1.listarClientes(F1);
+                    G1.listarClientes(clientesList);
                     break;
                 case 3:
                     G1.buscarClientes(F1);
                     break;
                 case 4:
-                    G1.procesarPago(F1);
+                    G1.procesarPago(pagosList);
+                    try {
+                        F1.escribirPagos(pagosList);
+                    }catch (IOException e){
+                        System.out.println(e);
+                    }
                     break;
                 case 5:
                     G1.consultarPagos(F1);

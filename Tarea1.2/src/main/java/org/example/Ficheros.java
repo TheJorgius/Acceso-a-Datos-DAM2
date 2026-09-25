@@ -43,4 +43,36 @@ public class Ficheros {
 
         return clientes;
     }
+
+    public void escribirClientes(List<Cliente> listaClientes) throws IOException {
+        List<String> lineas = new ArrayList<>();
+
+        for (Cliente cliente : listaClientes) {
+            lineas.add(cliente.getId() + ";" +
+                    cliente.getNombre() + ";" +
+                    cliente.getTlfn() + ";" +
+                    cliente.getMatricula());
+        }
+
+        Files.write(clientes, lineas, StandardCharsets.UTF_8);
+    }
+    public void escribirPagos(List<Pagos> listaPagos) throws IOException {
+        List<String> lineas = new ArrayList<>();
+
+        for (Pagos pago : listaPagos) {
+            lineas.add(pago.getId() + ";" +
+                    pago.getId_cliente() + ";" +
+                    pago.getFecha() + ";" +
+                    pago.getImporte() + ";" +
+                    pago.getLitros() + ";" +
+                    pago.getCombustible());
+        }
+
+        Files.write(pagos, lineas, StandardCharsets.UTF_8);
+    }
+
+
+
+
+
 }
