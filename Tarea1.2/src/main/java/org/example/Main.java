@@ -53,7 +53,7 @@ public class Main {
                     G1.listarClientes(clientesList);
                     break;
                 case 3:
-                    G1.buscarClientes(F1);
+                    G1.buscarClientes(clientesList);
                     break;
                 case 4:
                     G1.procesarPago(pagosList);
@@ -64,7 +64,7 @@ public class Main {
                     }
                     break;
                 case 5:
-                    G1.consultarPagos(F1);
+                    G1.consultarPagos(pagosList);
                     break;
                 case 0:
 

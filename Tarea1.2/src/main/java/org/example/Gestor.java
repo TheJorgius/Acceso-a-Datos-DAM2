@@ -5,6 +5,20 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Gestor {
+
+    public void listarClientes(List<Cliente> clientes) {
+        for (Cliente c : clientes) {
+            System.out.println(c);
+        }
+    }
+
+    public void consultarPagos(List<Pagos> pagos) {
+        for (Pagos p : pagos) {
+            System.out.println(p);
+        }
+    }
+
+
     public List<Cliente> darDeAlta(List<Cliente> clienteList){
         Scanner sc = new Scanner(System.in);
         System.out.println("Dime ID de cliente");
@@ -20,11 +34,6 @@ public class Gestor {
 
         return clienteList;
 
-    }
-    public void listarClientes(List<Cliente> clientes) {
-        for (Cliente cliente : clientes) {
-            System.out.println(cliente);
-        }
     }
 
     public List<Pagos> procesarPago(List<Pagos> pagosList) {
@@ -53,5 +62,36 @@ public class Gestor {
 
         return pagosList;
     }
+
+
+    public void buscarClientes(List<Cliente> clientes) {
+        Scanner sc = new Scanner(System.in);
+        boolean encontrado = false;
+
+        System.out.println("Pon algo que recuerdes del usuario:");
+        String texto = sc.nextLine();
+
+        while (texto=="") {
+            System.out.println("El texto no puede estar vacío");
+            texto = sc.nextLine();
+        }
+
+        texto = texto.toLowerCase();
+        for (Cliente c : clientes) {
+            if (c.getNombre().toLowerCase().contains(texto)
+                    || c.getTlfn().toLowerCase().contains(texto)
+                    || c.getMatricula().toLowerCase().contains(texto)) {
+
+                System.out.println(c);
+                encontrado = true;
+            }
+        }
+
+        if (!encontrado) {
+            System.out.println("No se han encontrado clientes");
+        }
+    }
+
+
 
 }

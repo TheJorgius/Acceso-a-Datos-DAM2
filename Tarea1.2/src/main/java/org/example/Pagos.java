@@ -44,4 +44,16 @@ public class Pagos {
     public String getCombustible() {
         return combustible;
     }
+
+    @Override
+    public String toString() {
+        return "Pago{" +
+                "id=" + id +
+                ", id de cliente='" + id_cliente + '\'' +
+                ", fecha='" + fecha + '\'' +
+                ", importe='" + importe + '\'' +
+                ", litros='" + litros + '\'' +
+                ", combustible='" + combustible + '\'' +
+                '}';
+    }
 }

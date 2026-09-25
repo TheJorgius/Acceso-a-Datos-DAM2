@@ -44,6 +44,27 @@ public class Ficheros {
         return clientes;
     }
 
+    public List<Pagos> leerPagos() throws IOException {
+        List<String> lineas = Files.readAllLines(pagos, StandardCharsets.UTF_8);
+        List<Pagos> pagosList = new ArrayList<>();
+
+        for (String linea : lineas) {
+            String[] datos = linea.split(";");
+
+            int id = Integer.parseInt(datos[0]);
+            int id_cliente = Integer.parseInt(datos[1]);
+            String fecha = datos[2];
+            int importe = Integer.parseInt(datos[3]);
+            int litros = Integer.parseInt(datos[4]);
+            String combustible = datos[5];
+
+            Pagos pago = new Pagos(id, id_cliente, fecha, importe, litros, combustible);
+            pagosList.add(pago);
+        }
+
+        return pagosList;
+    }
+
     public void escribirClientes(List<Cliente> listaClientes) throws IOException {
         List<String> lineas = new ArrayList<>();
 
