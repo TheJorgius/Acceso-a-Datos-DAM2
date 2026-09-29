@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Main {
-
     public static void mostrarMenu() {
         System.out.println("=== GESTIÓN DE GASOLINERA ===");
         System.out.println("1. Dar de alta un cliente");

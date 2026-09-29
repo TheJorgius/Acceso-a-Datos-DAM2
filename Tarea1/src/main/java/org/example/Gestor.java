@@ -6,19 +6,21 @@ import java.util.Scanner;
 
 public class Gestor {
 
+    //Recibe la lista de clientes y la lee con el toString de la clase Cliente
     public void listarClientes(List<Cliente> clientes) {
         for (Cliente c : clientes) {
             System.out.println(c);
         }
     }
 
+    //Recibe la lista de Pagos y la lee con el toString de la clase Pagos
     public void consultarPagos(List<Pagos> pagos) {
         for (Pagos p : pagos) {
             System.out.println(p);
         }
     }
 
-
+    //Pide la informacion del cliente crea al cliente y actualiza la lista que recibio y la devuelve
     public List<Cliente> darDeAlta(List<Cliente> clienteList){
         Scanner sc = new Scanner(System.in);
         System.out.println("Dime ID de cliente");
@@ -36,6 +38,7 @@ public class Gestor {
 
     }
 
+    // Pide la informacion del Pago crea el Pago y actualiza la lista que recibio y la devuelve
     public List<Pagos> procesarPago(List<Pagos> pagosList) {
         Scanner sc = new Scanner(System.in);
 
@@ -63,7 +66,7 @@ public class Gestor {
         return pagosList;
     }
 
-
+    // Busca para cada cliente el texto en cada atributo del cliente pasandolo a minuscula para evitar errores por mayusculas
     public void buscarClientes(List<Cliente> clientes) {
         Scanner sc = new Scanner(System.in);
         boolean encontrado = false;

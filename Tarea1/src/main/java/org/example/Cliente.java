@@ -2,10 +2,11 @@ package org.example;
 
 public class Cliente {
     private int id;
-    String nombre;
-    String tlfn;
-    String matricula;
+    private String nombre;
+    private String tlfn;
+    private String matricula;
 
+    //CONSTRUCTOR
     public Cliente(int id, String nombre, String telefono, String matricula) {
         this.id = id;
         this.nombre = nombre;
@@ -13,6 +14,7 @@ public class Cliente {
         this.matricula = matricula;
     }
 
+    //GETTERS
     public int getId() {
         return id;
     }
@@ -29,6 +31,7 @@ public class Cliente {
         return matricula;
     }
 
+    //@Ov
     @Override
     public String toString() {
         return "Cliente{" +

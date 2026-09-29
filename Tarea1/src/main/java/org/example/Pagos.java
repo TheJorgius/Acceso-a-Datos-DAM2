@@ -4,12 +4,13 @@ import java.util.Date;
 
 public class Pagos {
     private int id;
-    int id_cliente;
-    String fecha;
-    int importe;
-    int litros;
-    String combustible;
+    private int id_cliente;
+    private String fecha;
+    private int importe;
+    private int litros;
+    private String combustible;
 
+    //CONSTRUCTOR
     public Pagos(int id, int idCliente, String fecha, int importe, int litros, String combustible) {
         this.id = id;
         this.id_cliente = idCliente;
@@ -45,6 +46,7 @@ public class Pagos {
         return combustible;
     }
 
+    //@Ov
     @Override
     public String toString() {
         return "Pago{" +
