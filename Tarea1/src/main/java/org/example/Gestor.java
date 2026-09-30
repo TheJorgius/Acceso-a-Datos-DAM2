@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
-public class Gestor {
+public class Gestor{
 
     //Recibe la lista de clientes y la lee con el toString de la clase Cliente
     public void listarClientes(List<Cliente> clientes) {

@@ -7,17 +7,18 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Ficheros {
+public class Ficheros implements I_Ficheros{
     Path clientes = Path.of("Datos", "clientes.csv");
     Path pagos = Path.of("Datos", "pagos.csv");
     Path directorio = Path.of("Datos");
-
+    @Override
     public void crearDirectorioYArchivos() throws IOException {
         System.out.println("Creand directorio: " + directorio);
         Files.createDirectories(directorio);
         Files.createFile(pagos);
         Files.createFile(clientes);
     }
+    @Override
     public boolean comprobarRuta(Path archivo) {
         if (Files.exists(archivo)) {
             System.out.println("El archivo " + archivo + " existe");
@@ -27,6 +28,7 @@ public class Ficheros {
             return false;
         }
     }
+    @Override
     public List<Cliente> leerClientes() throws IOException {
         List<String> lineas = Files.readAllLines(clientes, StandardCharsets.UTF_8);
         List<Cliente> clientes = new ArrayList<>();
@@ -43,7 +45,7 @@ public class Ficheros {
 
         return clientes;
     }
-
+    @Override
     public List<Pagos> leerPagos() throws IOException {
         List<String> lineas = Files.readAllLines(pagos, StandardCharsets.UTF_8);
         List<Pagos> pagosList = new ArrayList<>();
@@ -64,7 +66,7 @@ public class Ficheros {
 
         return pagosList;
     }
-
+    @Override
     public void escribirClientes(List<Cliente> listaClientes) throws IOException {
         List<String> lineas = new ArrayList<>();
 
@@ -77,6 +79,7 @@ public class Ficheros {
 
         Files.write(clientes, lineas, StandardCharsets.UTF_8);
     }
+    @Override
     public void escribirPagos(List<Pagos> listaPagos) throws IOException {
         List<String> lineas = new ArrayList<>();
 
@@ -91,9 +94,6 @@ public class Ficheros {
 
         Files.write(pagos, lineas, StandardCharsets.UTF_8);
     }
-
-
-
 
 
 }
