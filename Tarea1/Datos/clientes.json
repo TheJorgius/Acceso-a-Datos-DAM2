@@ -1,8 +1,4 @@
-{
- [
-  {"id": 1,"nombre": "Ana López","telefono": "600123456","matricula": "1234ABC"},
-  {"id": 2,"nombre": "Óscar López","telefono": "654321098","matricula": "1234CBC"},
-  {"id": 3,"nombre": "Antonio López","telefono": "600123456","matricula": "1234DDD"}
- ]
-}
-
+{"id": 1,"nombre": Jorge,"telefono": 6552,"matricula": MAR},
+{"id": 2,"nombre": Emma,"telefono": 62346,"matricula": AMO},
+{"id": 3,"nombre": Luna,"telefono": 23523,"matricula": HIJ},
+{"id": 4,"nombre": Maria,"telefono": 243234,"matricula": 1321c},

@@ -11,6 +11,7 @@ public class Ficheros implements I_Ficheros{
     Path clientes = Path.of("Datos", "clientes.csv");
     Path pagos = Path.of("Datos", "pagos.csv");
     Path directorio = Path.of("Datos");
+    Path json = Path.of("Datos","clientes.json");
     @Override
     public void crearDirectorioYArchivos() throws IOException {
         System.out.println("Creand directorio: " + directorio);
@@ -95,5 +96,18 @@ public class Ficheros implements I_Ficheros{
         Files.write(pagos, lineas, StandardCharsets.UTF_8);
     }
 
+    @Override
+    public void ClientesDeCsvAJson() throws IOException {
+        List<Cliente> listaClientes = leerClientes();
+        List<String> lineas = new ArrayList<>();
 
+        for (Cliente cliente : listaClientes) {
+            lineas.add("{\"id\": " +cliente.getId() + "," +
+                    "\"nombre\": "+cliente.getNombre() + "," +
+                    "\"telefono\": "+cliente.getTlfn() + "," +
+                    "\"matricula\": "+cliente.getMatricula()+"},");
+        }
+
+        Files.write(json, lineas, StandardCharsets.UTF_8);
+    }
 }

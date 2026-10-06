@@ -101,4 +101,9 @@ public class Json implements I_Ficheros{
 
         Files.write(pagos, lineas, StandardCharsets.UTF_8);
     }
+
+    @Override
+    public void ClientesDeCsvAJson() throws IOException {
+
+    }
 }

@@ -1,6 +1,7 @@
 package org.example;
 
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.List;
 import java.util.Scanner;
 
@@ -64,6 +65,13 @@ public class Main {
                     }catch (IOException e){
                         System.out.println(e);
                     }
+                case 7:
+                    try {
+                        F1.ClientesDeCsvAJson();
+                    }catch (IOException e){
+                        System.out.println(e);
+                    }
+                    break;
                 case 0:
 
                     break;

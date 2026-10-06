@@ -11,5 +11,5 @@ public interface I_Ficheros {
     public List<Pagos> leerPagos()throws IOException;
     public void escribirClientes(List<Cliente> listaClientes)throws IOException;
     public void escribirPagos(List<Pagos> listaPagos)throws IOException;
-
+    public void ClientesDeCsvAJson()throws IOException;
 }
