@@ -42,11 +42,6 @@ public class Main {
             switch (opcion) {
                 case 1:
                     clientesList = G1.darDeAlta(clientesList);
-                    try {
-                        F1.escribirClientes(clientesList);
-                    }catch (IOException e){
-                        System.out.println(e);
-                    }
 
                     break;
                 case 2:
@@ -57,11 +52,7 @@ public class Main {
                     break;
                 case 4:
                     G1.procesarPago(pagosList);
-                    try {
-                        F1.escribirPagos(pagosList);
-                    }catch (IOException e){
-                        System.out.println(e);
-                    }
+
                     break;
                 case 5:
                     G1.consultarPagos(pagosList);
@@ -89,6 +80,16 @@ public class Main {
 
         }while (opcion != 0);
 
+        try {
+            F1.escribirClientes(clientesList);
+        }catch (IOException e){
+            System.out.println(e);
+        }
+        try {
+            F1.escribirPagos(pagosList);
+        }catch (IOException e){
+            System.out.println(e);
+        }
 
 
     }
