@@ -14,6 +14,7 @@ public class Main {
         System.out.println("4. Procesar un pago de repostaje ");
         System.out.println("5. Consultar pagos");
         System.out.println("6. Crear directorio y archivos(Primera vez o reparar)");
+        System.out.println("6. De Csv a Json)");
         System.out.println("0. Salir");
         System.out.println("Opcion:");
 
@@ -67,7 +68,7 @@ public class Main {
                     }
                 case 7:
                     try {
-                        F1.ClientesDeCsvAJson();
+                        F1.CsvAJson();
                     }catch (IOException e){
                         System.out.println(e);
                     }

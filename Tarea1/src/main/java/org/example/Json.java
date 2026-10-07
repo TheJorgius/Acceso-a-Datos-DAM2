@@ -103,7 +103,7 @@ public class Json implements I_Ficheros{
     }
 
     @Override
-    public void ClientesDeCsvAJson() throws IOException {
+    public void CsvAJson() throws IOException {
 
     }
 }

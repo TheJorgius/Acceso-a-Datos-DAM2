@@ -97,7 +97,7 @@ public class Ficheros implements I_Ficheros{
     }
 
     @Override
-    public void ClientesDeCsvAJson() throws IOException {
+    public void CsvAJson() throws IOException {
         List<Cliente> listaClientes = leerClientes();
         List<String> lineas = new ArrayList<>();
 
