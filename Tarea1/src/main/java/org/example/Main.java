@@ -26,7 +26,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int opcion;
-        I_Ficheros F1= new Ficheros();
+        I_Ficheros F1= new Json();
         Gestor G1= new Gestor();
         List<Cliente> clientesList=null;
         List<Pagos> pagosList=null;

@@ -1,5 +1,6 @@
 package org.example;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -33,21 +34,44 @@ public class Json implements I_Ficheros{
 
     @Override
     public List<Cliente> leerClientes() throws IOException {
-        List<String> lineas = Files.readAllLines(clientes, StandardCharsets.UTF_8);
-        List<Cliente> clientes = new ArrayList<>();
+        List<Cliente> clientesLeidos = new ArrayList<>();
 
-        for (String linea:lineas){
-            String[] datos = linea.split(",");
+        try (BufferedReader lector = Files.newBufferedReader(clientes)) {
+            String datos;
 
-            int id = Integer.parseInt(datos[0]);
-            String nombre = datos[1];
-            String tlfn = datos[2];
-            String matricula = datos[3];
-            Cliente cliente = new Cliente(id, nombre, tlfn, matricula);
-            clientes.add(cliente);
+            while ((datos = lector.readLine()) != null) {
+
+                if (!datos.contains("\"id\"")) {
+                    continue;
+                }
+                datos = datos.substring(
+                        datos.indexOf("{") + 1,
+                        datos.indexOf("}")
+                );
+                String[] campos = datos.split(",");
+
+                int id = Integer.parseInt(
+                        campos[0].substring(
+                                campos[0].indexOf(":") + 1
+                        ).trim()
+                );
+                String nombre = campos[1].substring(
+                        campos[1].indexOf(":") + 1
+                ).trim().replace("\"", "");
+                String telefono = campos[2].substring(
+                        campos[2].indexOf(":") + 1
+                ).trim().replace("\"", "");
+                String matricula = campos[3].substring(
+                        campos[3].indexOf(":") + 1
+                ).trim().replace("\"", "");
+                Cliente cliente = new Cliente(
+                        id, nombre, telefono, matricula
+                );
+                clientesLeidos.add(cliente);
+            }
         }
 
-        return clientes;
+        return clientesLeidos;
     }
 
     @Override
