@@ -76,36 +76,96 @@ public class Json implements I_Ficheros{
 
     @Override
     public List<Pagos> leerPagos() throws IOException {
-        List<String> lineas = Files.readAllLines(pagos, StandardCharsets.UTF_8);
-        List<Pagos> pagosList = new ArrayList<>();
+        List<Pagos> pagosLeidos = new ArrayList<>();
 
-        for (String linea : lineas) {
-            String[] datos = linea.split(",");
+        try (BufferedReader lector = Files.newBufferedReader(pagos)) {
+            String datos;
 
-            int id = Integer.parseInt(datos[0]);
-            int id_cliente = Integer.parseInt(datos[1]);
-            String fecha = datos[2];
-            int importe = Integer.parseInt(datos[3]);
-            int litros = Integer.parseInt(datos[4]);
-            String combustible = datos[5];
+            while ((datos = lector.readLine()) != null) {
 
-            Pagos pago = new Pagos(id, id_cliente, fecha, importe, litros, combustible);
-            pagosList.add(pago);
+                if (!datos.contains("\"id\"")) {
+                    continue;
+                }
+
+                datos = datos.substring(
+                        datos.indexOf("{") + 1,
+                        datos.indexOf("}")
+                );
+
+                String[] campos = datos.split(",");
+
+                int id = Integer.parseInt(
+                        campos[0].substring(
+                                campos[0].indexOf(":") + 1
+                        ).trim()
+                );
+
+                int idCliente = Integer.parseInt(
+                        campos[1].substring(
+                                campos[1].indexOf(":") + 1
+                        ).trim()
+                );
+
+                String fecha = campos[2].substring(
+                        campos[2].indexOf(":") + 1
+                ).trim().replace("\"", "");
+
+                int importe = Integer.parseInt(
+                        campos[3].substring(
+                                campos[3].indexOf(":") + 1
+                        ).trim()
+                );
+
+                int litros = Integer.parseInt(
+                        campos[4].substring(
+                                campos[4].indexOf(":") + 1
+                        ).trim()
+                );
+
+                String combustible = campos[5].substring(
+                        campos[5].indexOf(":") + 1
+                ).trim().replace("\"", "");
+
+                Pagos pago = new Pagos(
+                        id, idCliente, fecha, importe, litros, combustible
+                );
+
+                pagosLeidos.add(pago);
+            }
         }
 
-        return pagosList;
+        return pagosLeidos;
     }
 
     @Override
-    public void escribirClientes(List<Cliente> listaClientes) throws IOException {
+    public void escribirClientes(List<Cliente> listaClientes)
+            throws IOException {
+
         List<String> lineas = new ArrayList<>();
 
-        for (Cliente cliente : listaClientes) {
-            lineas.add("{\"id\": " +cliente.getId() + "," +
-                    "\"nombre\": "+cliente.getNombre() + "," +
-                    "\"telefono\": "+cliente.getTlfn() + "," +
-                    "\"matricula\": "+cliente.getMatricula()+"},");
+        lineas.add("{");
+        lineas.add("  \"clientes\": [");
+
+        for (int i = 0; i < listaClientes.size(); i++) {
+            Cliente cliente = listaClientes.get(i);
+
+            String coma = "";
+
+            if (i < listaClientes.size() - 1) {
+                coma = ",";
+            }
+
+            lineas.add(
+                    "    {\"id\": " + cliente.getId()
+                            + ",\"nombre\": \"" + cliente.getNombre()
+                            + "\",\"telefono\": \"" + cliente.getTlfn()
+                            + "\",\"matricula\": \"" + cliente.getMatricula()
+                            + "\"}" + coma
+            );
         }
+
+        lineas.add("  ]");
+        lineas.add("}");
 
         Files.write(clientes, lineas, StandardCharsets.UTF_8);
     }
