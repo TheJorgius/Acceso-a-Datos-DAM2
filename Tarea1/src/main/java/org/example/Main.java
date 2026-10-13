@@ -1,7 +1,6 @@
 package org.example;
 
 import java.io.IOException;
-import java.nio.file.Path;
 import java.util.List;
 import java.util.Scanner;
 
@@ -14,7 +13,7 @@ public class Main {
         System.out.println("4. Procesar un pago de repostaje ");
         System.out.println("5. Consultar pagos");
         System.out.println("6. Crear directorio y archivos(Primera vez o reparar)");
-        System.out.println("6. De Csv a Json)");
+        System.out.println("7. De Csv a Json)");
         System.out.println("0. Salir");
         System.out.println("Opcion:");
 
@@ -26,15 +25,16 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int opcion;
-        I_Ficheros F1= new Json();
+        I_Almacenamiento F1= new AlmacenamientoJson();
         Gestor G1= new Gestor();
+        MigraCSVToJson tranformador= new MigraCSVToJson();
         List<Cliente> clientesList=null;
         List<Pagos> pagosList=null;
         try {
             clientesList= F1.leerClientes();
             pagosList= F1.leerPagos();
         }catch (IOException e) {
-            System.out.println(e);;
+            System.out.println(e);
         }
 
 
@@ -53,7 +53,7 @@ public class Main {
                     G1.buscarClientes(clientesList);
                     break;
                 case 4:
-                    G1.procesarPago(pagosList);
+                    pagosList = G1.procesarPago(pagosList);
 
                     break;
                 case 5:
@@ -68,21 +68,16 @@ public class Main {
                     }
                 case 7:
                     try {
-                        F1.CsvAJson();
+                        clientesList= MigraCSVToJson.clientesCsvAJson();
+                        pagosList= MigraCSVToJson.pagosCsvAJson();
                     }catch (IOException e){
                         System.out.println(e);
                     }
                     break;
                 case 0:
-
                     break;
                 default:
                     System.out.println("Esa no es una opcion valida selecciona una opcion valida");
-                    try {
-                        F1.crearDirectorioYArchivos();
-                    }catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
                     break;
 
             }

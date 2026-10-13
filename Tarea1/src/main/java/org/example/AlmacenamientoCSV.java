@@ -7,11 +7,12 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Ficheros implements I_Ficheros{
+public class AlmacenamientoCSV implements I_Almacenamiento {
     Path clientes = Path.of("Datos", "clientes.csv");
     Path pagos = Path.of("Datos", "pagos.csv");
     Path directorio = Path.of("Datos");
-    Path json = Path.of("Datos","clientes.json");
+    Path json = Path.of("Datos", "clientes.json");
+
     @Override
     public void crearDirectorioYArchivos() throws IOException {
         System.out.println("Creand directorio: " + directorio);
@@ -19,6 +20,7 @@ public class Ficheros implements I_Ficheros{
         Files.createFile(pagos);
         Files.createFile(clientes);
     }
+
     @Override
     public boolean comprobarRuta(Path archivo) {
         if (Files.exists(archivo)) {
@@ -29,12 +31,13 @@ public class Ficheros implements I_Ficheros{
             return false;
         }
     }
+
     @Override
     public List<Cliente> leerClientes() throws IOException {
         List<String> lineas = Files.readAllLines(clientes, StandardCharsets.UTF_8);
         List<Cliente> clientes = new ArrayList<>();
 
-        for (String linea:lineas){
+        for (String linea : lineas) {
             String[] datos = linea.split(";");
             int id = Integer.parseInt(datos[0]);
             String nombre = datos[1];
@@ -46,6 +49,7 @@ public class Ficheros implements I_Ficheros{
 
         return clientes;
     }
+
     @Override
     public List<Pagos> leerPagos() throws IOException {
         List<String> lineas = Files.readAllLines(pagos, StandardCharsets.UTF_8);
@@ -67,6 +71,7 @@ public class Ficheros implements I_Ficheros{
 
         return pagosList;
     }
+
     @Override
     public void escribirClientes(List<Cliente> listaClientes) throws IOException {
         List<String> lineas = new ArrayList<>();
@@ -80,6 +85,7 @@ public class Ficheros implements I_Ficheros{
 
         Files.write(clientes, lineas, StandardCharsets.UTF_8);
     }
+
     @Override
     public void escribirPagos(List<Pagos> listaPagos) throws IOException {
         List<String> lineas = new ArrayList<>();
@@ -94,20 +100,5 @@ public class Ficheros implements I_Ficheros{
         }
 
         Files.write(pagos, lineas, StandardCharsets.UTF_8);
-    }
-
-    @Override
-    public void CsvAJson() throws IOException {
-        List<Cliente> listaClientes = leerClientes();
-        List<String> lineas = new ArrayList<>();
-
-        for (Cliente cliente : listaClientes) {
-            lineas.add("{\"id\": " +cliente.getId() + "," +
-                    "\"nombre\": "+cliente.getNombre() + "," +
-                    "\"telefono\": "+cliente.getTlfn() + "," +
-                    "\"matricula\": "+cliente.getMatricula()+"},");
-        }
-
-        Files.write(json, lineas, StandardCharsets.UTF_8);
     }
 }

@@ -8,7 +8,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Json implements I_Ficheros{
+public class AlmacenamientoJson implements I_Almacenamiento {
     Path clientes = Path.of("Datos", "clientes.json");
     Path pagos = Path.of("Datos", "pagos.json");
     Path directorio = Path.of("Datos");
@@ -80,36 +80,28 @@ public class Json implements I_Ficheros{
 
         try (BufferedReader lector = Files.newBufferedReader(pagos)) {
             String datos;
-
             while ((datos = lector.readLine()) != null) {
-
                 if (!datos.contains("\"id\"")) {
                     continue;
                 }
-
                 datos = datos.substring(
                         datos.indexOf("{") + 1,
                         datos.indexOf("}")
                 );
-
                 String[] campos = datos.split(",");
-
                 int id = Integer.parseInt(
                         campos[0].substring(
                                 campos[0].indexOf(":") + 1
                         ).trim()
                 );
-
                 int idCliente = Integer.parseInt(
                         campos[1].substring(
                                 campos[1].indexOf(":") + 1
                         ).trim()
                 );
-
                 String fecha = campos[2].substring(
                         campos[2].indexOf(":") + 1
                 ).trim().replace("\"", "");
-
                 int importe = Integer.parseInt(
                         campos[3].substring(
                                 campos[3].indexOf(":") + 1
@@ -121,7 +113,6 @@ public class Json implements I_Ficheros{
                                 campos[4].indexOf(":") + 1
                         ).trim()
                 );
-
                 String combustible = campos[5].substring(
                         campos[5].indexOf(":") + 1
                 ).trim().replace("\"", "");
@@ -129,7 +120,6 @@ public class Json implements I_Ficheros{
                 Pagos pago = new Pagos(
                         id, idCliente, fecha, importe, litros, combustible
                 );
-
                 pagosLeidos.add(pago);
             }
         }
@@ -175,19 +165,14 @@ public class Json implements I_Ficheros{
         List<String> lineas = new ArrayList<>();
 
         for (Pagos pago : listaPagos) {
-            lineas.add("{\"id\": " +pago.getId() + "," +
-                    "\"id_cliente\": " +pago.getId_cliente() + "," +
-                    "\"fecha\": " +pago.getFecha() + "," +
-                    "\"importe\": " +pago.getImporte() + "," +
-                    "\"Litros\": " +pago.getLitros() + "," +
-                    "\"tipo combustible\": " +pago.getCombustible()+"},");
+            lineas.add("{\"id\": " + pago.getId() + "," +
+                    "\"id_cliente\": " + pago.getId_cliente() + "," +
+                    "\"fecha\": " + pago.getFecha() + "," +
+                    "\"importe\": " + pago.getImporte() + "," +
+                    "\"Litros\": " + pago.getLitros() + "," +
+                    "\"tipo combustible\": " + pago.getCombustible() + "},");
         }
 
         Files.write(pagos, lineas, StandardCharsets.UTF_8);
-    }
-
-    @Override
-    public void CsvAJson() throws IOException {
-
     }
 }
