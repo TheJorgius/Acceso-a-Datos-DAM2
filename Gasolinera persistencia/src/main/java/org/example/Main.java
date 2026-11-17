@@ -14,7 +14,7 @@ public class Main {
         System.out.println("4. Procesar un pago de repostaje ");
         System.out.println("5. Consultar pagos");
         System.out.println("6. Crear directorio y archivos(Primera vez o reparar)");
-        System.out.println("7. De Csv a Json)");
+        System.out.println("7. Importar datos desde CSV");
         System.out.println("0. Salir");
         System.out.println("Opcion:");
 
@@ -31,45 +31,23 @@ public class Main {
 
         int opcion;
 
-        // Almacenamiento JSON actual
-        I_Almacenamiento F1 = new AlmacenamientoJson();
-
-        // Nuevo almacenamiento SQLite
+        // Almacenamiento SQLite
         AlmacenamientoSQLite BD = new AlmacenamientoSQLite();
+        I_Almacenamiento F1 = BD;
 
         // Gestor de la gasolinera
         Gestor G1 = new Gestor();
 
-        // Transformador CSV a JSON
-        MigraCSVToJson tranformador = new MigraCSVToJson();
+        List<Cliente> clientesList = new ArrayList<>();
+        List<Pagos> pagosList = new ArrayList<>();
 
-        List<Cliente> clientesList = null;
-        List<Pagos> pagosList = null;
-
-        // Crear y comprobar la base de datos SQLite
         try {
-
             BD.crearDirectorioYArchivos();
-
-            System.out.println("Base de datos SQLite preparada.");
-
-        } catch (IOException e) {
-
-            System.out.println("Error con SQLite:");
-            e.printStackTrace();
-
-        }
-
-        // Cargar clientes y pagos desde JSON
-        try {
-
             clientesList = F1.leerClientes();
             pagosList = F1.leerPagos();
-
         } catch (IOException e) {
-
-            System.out.println(e);
-
+            System.out.println("No se pudo iniciar el almacenamiento SQLite: " + e.getMessage());
+            return;
         }
 
         do {
@@ -121,14 +99,9 @@ public class Main {
         }while (opcion != 0);
 
         try {
-            F1.escribirClientes(clientesList);
-        }catch (IOException e){
-            System.out.println(e);
-        }
-        try {
-            F1.escribirPagos(pagosList);
-        }catch (IOException e){
-            System.out.println(e);
+            BD.guardarDatos(clientesList, pagosList);
+        } catch (IOException e) {
+            System.out.println("No se pudieron guardar los datos en SQLite: " + e.getMessage());
         }
 
 
