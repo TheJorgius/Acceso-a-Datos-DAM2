@@ -170,7 +170,7 @@ Estas señales sirven para entender el avance, pero hay que usarlas con cuidado 
 - Validaciones con `IllegalArgumentException`.
 - `LocalDate` / `LocalDateTime` en el modelo nuevo.
 - Scripts SQL separados por responsabilidad: esquema, triggers, datos, comprobaciones.
-- Documentación técnica más detallada en `README.md`, `INSTRUCTIONS.md` y `docs/`.
+- Documentación técnica más detallada en `README.md` y `docs/`.
 
 ## 8. Cómo debe ayudar una IA en este repo
 
